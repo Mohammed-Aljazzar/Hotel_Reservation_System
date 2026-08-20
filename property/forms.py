@@ -1,5 +1,14 @@
 from django import forms 
-from .models import PropertyBook, PropertyReview
+from .models import PropertyBook, PropertyReview, Property
+
+
+class PropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = ['name', 'image', 'price', 'description', 'place', 'category']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 6}),
+        }
 
 class PropertyBookForm(forms.ModelForm):
     date_from = forms.DateField(widget=forms.DateInput(attrs={'id':'checkin_date'}))

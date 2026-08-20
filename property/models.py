@@ -101,8 +101,8 @@ class PropertyBook(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='book_owner')
     date_from = models.DateField(default=timezone.now)
     date_to = models.DateField(default=timezone.now)
-    guest = models.IntegerField(max_length=2, choices=COUNT)
-    childern = models.IntegerField(max_length=2, choices=COUNT)
+    guest = models.IntegerField(choices=COUNT)
+    childern = models.IntegerField(choices=COUNT)
 
     def __str__(self):
         return str(self.property)
