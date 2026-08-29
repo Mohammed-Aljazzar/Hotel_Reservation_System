@@ -1,186 +1,188 @@
 # Airbnb Reservations
 
-A Django-based web application for a travel booking platform, allowing users to explore, book, and review properties (hotels, restaurants, and places), manage profiles, and engage with blog content. The platform provides a user-friendly interface for travelers to discover destinations, make reservations, and share feedback, with features like property filtering, user authentication, and a blog section for tips and articles.
+> منصة حجوزات سفر مبنية بـ Django، تتيح استكشاف العقارات وإدارتها، تنفيذ الحجوزات، كتابة التقييمات، وإثراء تجربة المستخدم عبر مدونة ومحتوى تعريفي.
 
-## Table of Contents
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.2-092E20?logo=django&logoColor=white)
+![Database](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white)
+![API](https://img.shields.io/badge/API-Django%20REST%20Framework-ff1709)
 
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## الفكرة
 
-## Features
+**Airbnb Reservations** هو تطبيق ويب لإدارة واستعراض خيارات الإقامة والسفر، مثل الفنادق والمطاعم والأماكن. يستطيع الزوار البحث والتصفية واستعراض التفاصيل، بينما يستطيع المستخدم المسجّل إدارة ملفه الشخصي، نشر عقاراته، إجراء الحجوزات، وإضافة تقييماته. كما يوفر المشروع مدونة قابلة للبحث والتصنيف، ولوحة إدارة Django لإدارة المحتوى بالكامل.
 
-This project includes the following features:
+## المزايا
 
-- **User Authentication**:
-  - Sign up, log in, and log out functionality.
-  - Password reset and change options.
-  - User profile management with image upload, phone number, and address.
+### العقارات والحجوزات
 
-- **Property Management**:
-  - Browse properties (hotels, restaurants, places) with filtering by name, description, category, and place.
-  - Detailed property views with images, descriptions, availability checks, and average ratings.
-  - Book properties with a form for selecting dates, guests, and children.
-  - Users can view their reservations and listings.
-  - Property review system for users to rate and provide feedback.
+- عرض العقارات مع pagination وخيارات التصفية حسب الاسم والوصف والتصنيف والمكان.
+- صفحات تفصيلية للعقار تشمل الصور والسعر والوصف والحالة ومتوسط التقييمات وعقارات مشابهة.
+- إنشاء العقارات وتعديلها وحذفها، مع ضمان أن المالك فقط يستطيع إدارة عقاره.
+- الحجز من صفحة العقار باختيار تاريخ الوصول والمغادرة وعدد الضيوف والأطفال.
+- صفحة حجوزاتي وصفحة عقاراتي للمستخدم.
+- تقييمات وملاحظات المستخدمين للعقارات، مع إمكانية تعديل التقييم الموجود.
 
-- **Blog Section**:
-  - View blog posts with categories, tags, and search functionality.
-  - Detailed post views with Disqus comments integration.
-  - Filter posts by category or tag.
+### الحسابات والمحتوى
 
-- **About Page**:
-  - Displays information about the platform's mission, goals, and activities.
-  - FAQ section with collapsible answers.
+- إنشاء حساب وتسجيل الدخول وتسجيل الخروج.
+- تعديل بيانات المستخدم والصورة الشخصية ورقم الهاتف والعنوان.
+- مسارات Django الجاهزة لتغيير كلمة المرور واستعادتها.
+- مدونة تشمل البحث، التصنيفات، الوسوم، المقالات الحديثة، وصفحات التفاصيل.
+- صفحة «من نحن» وأسئلة شائعة قابلة للإدارة.
+- إعدادات موقع ديناميكية في التذييل: الشعار، وسائل التواصل، بيانات الاتصال والوصف.
 
-- **Search and Filtering**:
-  - Home page search by property name and place.
-  - Category and place-based filtering for properties.
-  - Blog search by title or description.
+### الإدارة وواجهة البرمجة
 
-- **Responsive Design**:
-  - Built with Bootstrap 4 for a mobile-friendly interface.
-  - Includes Owl Carousel for image sliders and AOS for animations.
+- لوحة Django Admin لإدارة المستخدمين والعقارات والحجوزات والتقييمات والمدونة والإعدادات.
+- محرر **Django Summernote** للمحتوى الغني من لوحة الإدارة.
+- REST API محمية بالمصادقة عبر Token، مع Swagger وReDoc لتوثيق الـAPI.
 
-- **Admin Panel**:
-  - Django admin interface for managing properties, users, blog posts, and settings.
-  - Integration with Django Summernote for rich text editing.
+## التقنيات المستخدمة
 
-- **Footer and Settings**:
-  - Dynamic footer with site name, description, social media links, and contact information.
-  - Configurable settings via the `Settings` model.
+| الجانب | التقنيات |
+| --- | --- |
+| Backend | Python 3.13، Django 5.2 |
+| قاعدة البيانات | SQLite افتراضياً |
+| API | Django REST Framework، Token Authentication، drf-spectacular |
+| المصادقة | Django Authentication، django-allauth، dj-rest-auth |
+| البحث والتصفية | django-filter، Django ORM و`Q` queries |
+| المحتوى | django-taggit، django-summernote |
+| الواجهة | Django Templates، Bootstrap 4، jQuery |
+| تجربة الواجهة | Owl Carousel، AOS، Magnific Popup، Bootstrap Datepicker، Ionicons وOpen Iconic |
+| الصور والملفات | Pillow وDjango Media Files |
+| النشر | Gunicorn، Procfile؛ تتوفر WhiteNoise ضمن الاعتمادات للملفات الثابتة |
 
-## Technologies Used
+## بنية المشروع
 
-- **Backend**:
-  - Django 5.2
-  - Python 3.12
-  - SQLite (default database, can be configured for others)
+```text
+.
+├── accounts/       # الحسابات والملف الشخصي
+├── property/       # العقارات والصور والحجوزات والتقييمات وAPI الخاصة بها
+├── blog/           # المقالات والتصنيفات والوسوم وAPI الخاصة بها
+├── about/          # صفحة من نحن والأسئلة الشائعة
+├── settings/       # الصفحة الرئيسية والبحث وإعدادات الموقع والتذييل
+├── project/        # إعدادات Django والمسارات الرئيسية وWSGI/ASGI
+├── templates/      # القالب الأساسي المشترك
+├── static/         # ملفات CSS وJavaScript والصور الثابتة
+├── media/          # الملفات التي يرفعها المستخدمون والمحتوى
+├── requirements.txt
+├── Procfile
+└── manage.py
+```
 
-- **Frontend**:
-  - Bootstrap 4
-  - jQuery
-  - Owl Carousel
-  - AOS (Animate on Scroll)
-  - Font Awesome and Ionicons
+## التشغيل محلياً
 
-- **Additional Libraries**:
-  - `django-taggit` for tagging blog posts
-  - `django-summernote` for rich text editing
-  - `django-filters` for property filtering
-  - Disqus for blog comments
+### المتطلبات
 
-- **Static and Media**:
-  - Static files for CSS, JavaScript, and images
-  - Media files for user-uploaded content (profile images, property images, etc.)
-
-## Installation
-
-Follow these steps to set up the project locally:
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package manager)
-- Virtualenv (recommended)
+- Python 3.13 (أو إصدار متوافق مع Django 5.2)
+- `pip`
 - Git
 
-### Steps
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Mohammed-Aljazzar/Airbnb-Reservations.git
-   cd Airbnb-Reservations
-   ```
-   
-2. Create a Virtual Environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-   
-4. Install Dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   Note: If requirements.txt is not provided, install the following packages:
-    ```bash
-   pip install django django-taggit django-summernote django-filters bootstrap4
-   ```
-  
-6. Apply Migrations:
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
+### الخطوات
 
-8. Create a Superuser (for admin access):
-   ```bash
-   python manage.py createsuperuser
-   ```
+```bash
+git clone https://github.com/Mohammed-Aljazzar/Airbnb-Reservations.git
+cd Airbnb-Reservations
 
-10. Collect Static Files:
-    ```bash
-    python manage.py collectstatic
-    ```
-    
-12. Run the Development Server:
-    ```bash
-    python manage.py runserver
-    ```
+# Linux / macOS
+python3 -m venv .venv
+source .venv/bin/activate
 
-## Usage
+# Windows (PowerShell)
+# .venv\Scripts\Activate.ps1
 
-- **Home Page:** Explore featured destinations, search for properties, and browse categories.
-- **Property Listing:** Filter properties by name, description, category, or place. Click on a property to view details and book.
-- **User Profile:** Sign up or log in to manage your profile, view reservations, and list your properties.
-- **Blog:** Read articles, filter by category or tag, and leave comments using Disqus.
-- **About Page:** Learn about the platform and view FAQs.
-- **Admin Panel:** Manage users, properties, blog posts, and site settings.
-   
-## Configuration
-### Environment Variables
+pip install --upgrade pip
+pip install -r requirements.txt
 
-Update project/settings.py for production:
-- Set DEBUG = False.
-- Configure ALLOWED_HOSTS.
-- Replace SECRET_KEY with a secure value.
-- Configure a production database (e.g., PostgreSQL).
+# الحزم المطلوبة في إعدادات المشروع إن لم تكن متوفرة في بيئتك
+pip install django-allauth dj-rest-auth drf-spectacular
 
-### Media Files
-Ensure the MEDIA_ROOT directory exists and is writable:
-  ``` bash
-  MEDIA_URL = '/media/'
-  MEDIA_ROOT = BASE_DIR / 'media'
-  ```
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
 
-### Disqus Integration
-For blog comments, configure Disqus in post_detail.html:
-- Update disqus_config with your Disqus shortname and site URL.
-  
-### Static Files
-For production, use a storage backend like WhiteNoise or a CDN:
-  ```bash
-  # In settings.py
-  STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'staticroot')
-  STATICFILES_DIRS = [BASE_DIR / "static"]
-  ```
+بعد التشغيل، افتح [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
-## Contributing
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature/your-feature).
-3. Make your changes and commit (git commit -m "Add your feature").
-4. Push to the branch (git push origin feature/your-feature).
-5. Open a Pull Request.
+### أوامر مفيدة
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+```bash
+# التحقق من إعدادات Django
+python manage.py check
 
-## Contact
-For questions or feedback, please contact:
-- Author: Mohammed Aljazzar
-- Email: m.i.aljazzar19@gmail.com
+# تشغيل الاختبارات
+python manage.py test
+
+# تجهيز الملفات الثابتة للنشر
+python manage.py collectstatic --noinput
+```
+
+## المسارات المهمة
+
+| المسار | الوصف |
+| --- | --- |
+| `/` | الصفحة الرئيسية، الفئات، الأماكن والمحتوى المميز |
+| `/property/` | قائمة العقارات مع التصفية |
+| `/property/create/` | إضافة عقار (يتطلب تسجيل الدخول) |
+| `/accounts/signup` | إنشاء حساب |
+| `/accounts/profile/` | الملف الشخصي |
+| `/blog/` | المدونة والبحث في المقالات |
+| `/about/` | من نحن والأسئلة الشائعة |
+| `/admin/` | لوحة الإدارة |
+
+## REST API والتوثيق
+
+تستخدم واجهات الـAPI مصادقة Token؛ أرسل الترويسة التالية إلى المسارات المحمية:
+
+```http
+Authorization: Token <your-token>
+```
+
+| المسار | الوظيفة |
+| --- | --- |
+| `/property/api/list/` | عرض/إنشاء العقارات |
+| `/property/api/list/<id>` | عرض/تعديل/حذف عقار |
+| `/blog/api/list/` | عرض المقالات |
+| `/blog/api/list/<id>/` | عرض مقال |
+| `/blog/api/list/filter/<query>/` | البحث في المقالات |
+| `/api/schema/` | مخطط OpenAPI |
+| `/api/docs/` | Swagger UI |
+| `/api/redoc/` | ReDoc |
+| `/rest-auth/` | مسارات المصادقة عبر REST |
+| `/rest-auth/registration/` | تسجيل حساب عبر REST |
+
+## الإعداد للنشر والإنتاج
+
+قبل النشر، لا تستخدم قيم التطوير الموجودة في `project/settings.py`. على الأقل:
+
+1. انقل `SECRET_KEY` إلى متغير بيئة جديد وآمن.
+2. اجعل `DEBUG = False`.
+3. حدّد `ALLOWED_HOSTS` لنطاقات مشروعك.
+4. استبدل SQLite بقاعدة بيانات إنتاج مناسبة مثل PostgreSQL.
+5. اضبط تخزين `STATIC_ROOT` و`MEDIA_ROOT`، وفعل WhiteNoise أو CDN للملفات الثابتة.
+6. لا ترفع كلمات مرور أو مفاتيح API أو بيانات إنتاج إلى GitHub.
+
+يتوفر `Procfile` لتشغيل التطبيق عبر Gunicorn:
+
+```bash
+gunicorn project.wsgi --log-file -
+```
+
+## المساهمة
+
+المساهمات مرحّب بها:
+
+1. اعمل Fork للمستودع.
+2. أنشئ فرعاً جديداً: `git checkout -b feature/feature-name`.
+3. نفّذ التعديلات واختبرها.
+4. أرسل Pull Request يوضح التغيير.
+
+## ملاحظات المستودع
+
+- لا يحتوي المستودع حالياً على ملف `LICENSE`؛ أضف ترخيصاً (مثل MIT) قبل إعادة استخدام المشروع أو توزيعه بشروط واضحة.
+- يفضّل إضافة `.gitignore` قبل النشر العام لاستبعاد `.venv/` و`__pycache__/` و`db.sqlite3` والملفات المرفوعة في `media/` وملفات النظام مثل `.DS_Store`.
+
+## المطوّر
+
+**Mohammed Aljazzar**<br>
+للتواصل: [m.i.aljazzar19@gmail.com](mailto:m.i.aljazzar19@gmail.com)
