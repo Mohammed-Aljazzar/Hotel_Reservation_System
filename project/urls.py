@@ -18,6 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
+
 
 urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
@@ -28,7 +34,32 @@ urlpatterns = [
     path('', include('settings.urls', namespace='settings')),
     path('about/', include('about.urls', namespace='about')),
     path('summernote/', include('django_summernote.urls')),
-    path("api-auth/", include("rest_framework.urls"))
+    
+    path("api-auth/", include("rest_framework.urls")),
+    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    
+    # OpenAPI Schema
+    path(
+        'api/schema/',
+        SpectacularAPIView.as_view(),
+        name='api-schema'
+    ),
+
+    # Swagger
+    path(
+        'api/docs/',
+        SpectacularSwaggerView.as_view(url_name='api-schema'),
+        name='swagger-ui'
+    ),
+
+    # ReDoc
+    path(
+        'api/redoc/',
+        SpectacularRedocView.as_view(url_name='api-schema'),
+        name='redoc'
+    ),
+
 ] 
 
 
