@@ -1,4 +1,4 @@
-# Airbnb Reservations
+# Hotel Reservations
 
 > A Django-powered travel booking platform for exploring and managing properties, making reservations, sharing reviews, and discovering travel content through a blog.
 
