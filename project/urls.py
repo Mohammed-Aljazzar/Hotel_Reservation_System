@@ -59,6 +59,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name='api-schema'),
         name='redoc'
     ),
+    path("i18n/", include("django.conf.urls.i18n")),
 
 ] 
 

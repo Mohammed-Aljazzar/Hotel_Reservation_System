@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView
 from .models import Post, Category
 from taggit.models import Tag
@@ -35,10 +35,8 @@ class PostByCategory(ListView):
     
     
     def get_queryset(self):
-        object_list = Post.objects.filter(
-            Q(category__name__icontains=self.kwargs['slug']))
-            
-        return object_list
+        category = get_object_or_404(Category, slug=self.kwargs['slug'])
+        return Post.objects.filter(category=category)
     
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -57,4 +55,3 @@ class PostByTag(ListView):
 
 
   
-

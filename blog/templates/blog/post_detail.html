@@ -78,7 +78,7 @@
                     <div class="categories">
                         <h3>Categories</h3>
                         {% for category in categories %}
-                            <li><a href="{% url 'blog:post_by_category' category %}">{{category}} <span>({{category.post_count}})</span></a></li>
+                            <li><a href="{% url 'blog:post_by_category' category.slug %}">{{category}} <span>({{category.post_count}})</span></a></li>
                         {% endfor %}
                     </div>
                 </div>

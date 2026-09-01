@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     ### Apps 
     'property',
     'about',
-    'blog',
+    'blog.apps.BlogConfig',
     'settings', 
     'taggit',
     'django_summernote',
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     
     'drf_spectacular',
+    'tof'
 
 ]
 
@@ -88,6 +89,7 @@ SPECTACULAR_SETTINGS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -153,13 +155,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ("ar", ("Arabic")),
+    ("en", ("English")),
+]
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 
 # Static files (CSS, JavaScript, Images)

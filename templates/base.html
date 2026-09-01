@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>{{myfooter.site_name}}</title>
     <meta charset="utf-8">
@@ -22,6 +23,49 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .language-switcher {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin: 9px 8px;
+            border: 1px solid rgba(255, 255, 255, .55);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .1);
+            transition: .2s ease;
+        }
+        .language-switcher:hover, .language-switcher:focus-within {
+            border-color: #f6d365;
+            background: rgba(246, 211, 101, .16);
+            box-shadow: 0 0 0 3px rgba(246, 211, 101, .12);
+        }
+        .language-switcher__icon {
+            padding-inline-start: 11px;
+            color: #f6d365;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        .language-switcher select {
+            min-width: 112px;
+            padding: 6px 27px 6px 8px;
+            border: 0;
+            outline: 0;
+            color: #fff;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            appearance: none;
+        }
+        .language-switcher::after {
+            content: "⌄";
+            position: absolute;
+            inset-inline-end: 10px;
+            color: #f6d365;
+            font-size: 16px;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -34,19 +78,34 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="{% url 'settings:home' %}" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="{% url 'about:about' %}" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="{% url 'property:property_list' %}" class="nav-link">Properties</a></li>
-                    <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="{% url 'settings:contact_us' %}" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="{% url 'settings:home' %}" class="nav-link">{% translate "Home" %}</a></li>
+                    <li class="nav-item"><a href="{% url 'about:about' %}" class="nav-link">{% translate "About" %}</a></li>
+                    <li class="nav-item"><a href="{% url 'property:property_list' %}" class="nav-link">{% translate "Properties" %}</a></li>
+                    <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link">{% translate "Blog" %}</a></li>
+                    <li class="nav-item"><a href="{% url 'settings:contact_us' %}" class="nav-link">{% translate "Contact" %}</a></li>
+                    
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'accounts:mylisting' %}" class="nav-link">Add Listing</a></li>
-                    <li class="nav-item cta mx-2"><a href="{% url 'accounts:profile' %}" class="nav-link"><span>Profile</span></a></li>
-                    <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>Logout</span></a></li>
+                    <li class="nav-item"><a href="{% url 'accounts:mylisting' %}" class="nav-link">{% translate "Add Listing" %}</a></li>
+                    <li class="nav-item cta mx-2"><a href="{% url 'accounts:profile' %}" class="nav-link"><span>{% translate "Profile" %}</span></a></li>
+                    <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>{% translate "Logout" %}</span></a></li>
                     {% else %}
-                    <li class="nav-item cta"><a href="{% url 'login' %}" class="nav-link"><span>Login</span></a></li>
-                    <li class="nav-item cta mx-2"><a href="{% url 'accounts:signup' %}" class="nav-link"><span>Sign Up</span></a></li>
+                    <li class="nav-item cta"><a href="{% url 'login' %}" class="nav-link"><span>{% translate "Login" %}</span></a></li>
+                    <li class="nav-item cta mx-2"><a href="{% url 'accounts:signup' %}" class="nav-link"><span>{% translate "Sign Up" %}</span></a></li>
                     {% endif %}
+                    {% get_available_languages as LANGUAGES %}
+                    <li class="nav-item">
+                        <form action="{% url 'set_language' %}" method="post" class="language-switcher">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <label class="sr-only" for="language-selector">{% translate "Language" %}</label>
+                            <span class="language-switcher__icon" aria-hidden="true">◉</span>
+                            <select id="language-selector" name="language" onchange="this.form.submit()">
+                                {% for language_code, language_name in LANGUAGES %}
+                                    <option style="color: #000;" value="{{ language_code }}"{% if language_code == LANGUAGE_CODE %} selected{% endif %}>{{ language_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -153,4 +212,3 @@
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
-
